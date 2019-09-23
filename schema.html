@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hybird--schema</title>
+</head>
+<body>
+  <button id="btn-share">share</button><br/>
+  <button id="btn-scan1">scan (no data no callback)</button><br/>
+  <button id="btn-scan2">scan (no callback)</button><br/>
+  <button id="btn-scan3">scan (no data)</button><br/>
+  <button id="btn-scan4">scan (test data)</button><br/>
+  <button id="btn-scan5">scan (test data)</button><br/>
+
+  <script src="./invoke.js"></script>
+  <script>
+    document.getElementById('btn-share').addEventListener('click', function () {
+      window.invoke.share({
+        title: '分享标题',
+        description: '分享简介',
+        url: 'https://www.mysite.com',
+      }, function (result) {
+        if (result.errCode === 0) {
+          alert('分享成功');
+        } else {
+          alert(result.errMsg);
+        }
+      });
+    });
+
+    document.getElementById('btn-scan1').addEventListener('click', function () {
+      window.invoke.scan();
+    });
+    document.getElementById('btn-scan2').addEventListener('click', function () {
+      window.invoke.scan({
+        id: 2019,
+        name: 'hello'
+      });
+    });
+    document.getElementById('btn-scan3').addEventListener('click', function () {
+      window.invoke.scan(null, function (result) {
+        alert(result);
+      });
+    });
+    document.getElementById('btn-scan4').addEventListener('click', function () {
+      window.invoke.scan({
+        id: 0,
+        name: 'hello',
+      }, function (result) {
+        alert(result);
+      });
+    });
+    document.getElementById('btn-scan5').addEventListener('click', function () {
+      window.invoke.scan({
+        id: undefined,
+        name: 'hello',
+      }, function (result) {
+        alert(result);
+      });
+    });
+  </script>
+</body>
+</html>
